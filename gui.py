@@ -79,3 +79,9 @@ class CalculatorGUI:
         except Exception as e:
             self.input_var.set("Error")
             print(e)
+
+
+if __name__ == "__main__":
+    window = tk.Tk()
+    app = CalculatorGUI(window)
+    window.mainloop()
