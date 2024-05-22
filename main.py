@@ -81,9 +81,12 @@ if __name__ == "__main__":
                 elif operator == "/":
                     calc.divide(num)
                 else:
-                    logging.error("Invalid operator.")
+                    if num != 0:
+                        calc.divide(num)
+            else:
+                logging.error("Division by zero is not allowed.")
 
-            # Finally, perform the operation with the last number
+            # Perform the operation with the last number
             last_operator = expressions[-1][
                 1
             ]  # get the operator for the last calculation
@@ -96,9 +99,12 @@ if __name__ == "__main__":
             elif last_operator == "/":
                 calc.divide(num)
             else:
-                logging.error("Invalid operator.")
-
-            print(f"Result: {calc.result}")
+                if num != 0:
+                    calc.divide(num)
+                else:
+                    logging.error("Division by zero is not allowed.")
+            # else:
+            #     logging.error("Invalid operator.")
 
             calc.clear()
 
