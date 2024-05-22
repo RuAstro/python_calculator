@@ -63,3 +63,19 @@ class CalculatorGUI:
                 row=(buttons.index((text, command)) // 4),
                 column=(buttons.index((text, command)) % 4),
             )
+
+    def append_to_input(self, value):
+        current_input = self.input_var.get()
+        self.input_var.set(current_input + value)
+
+    def clear_input(self):
+        self.input_var.set("")
+
+    def calculate(self):
+        expression = self.input_var.get()
+        try:
+            result = eval(expression)
+            self.input_var.set(str(result))
+        except Exception as e:
+            self.input_var.set("Error")
+            print(e)
