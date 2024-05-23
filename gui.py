@@ -16,9 +16,12 @@ class CalculatorGUI:
 
         self.create_widgets()
 
+        self.window.grid_rowconfigure(0, weight=1)
+        self.window.grid_columnconfigure(0, weight=1)
+
     def create_widgets(self):
         input_frame = tk.Frame(self.window)
-        input_frame.pack(padx=10, pady=10)
+        input_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
         self.input_entry = tk.Entry(
             input_frame,
@@ -27,10 +30,10 @@ class CalculatorGUI:
             bd=10,
             justify="center",
         )
-        self.input_entry.pack(fill="x")
+        self.input_entry.pack(fill="x", expand=True)
 
         button_frame = tk.Frame(self.window)
-        button_frame.pack(padx=10, pady=10)
+        button_frame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
 
         buttons = [
             ("7", lambda: self.append_to_input("7")),
@@ -56,8 +59,8 @@ class CalculatorGUI:
                 button_frame,
                 text=text,
                 font=("", 10),
-                padx=10,
-                pady=10,
+                padx=5,
+                pady=5,
                 command=command,
             )
             button.grid(
@@ -65,7 +68,14 @@ class CalculatorGUI:
                 column=(buttons.index((text, command)) % 4),
                 padx=5,
                 pady=5,
+                sticky="nsew",
             )
+
+        # resize buttons to the size of user expand
+        for i in range(4):
+            button_frame.grid_rowconfigure(i, weight=1)
+        for i in range(4):
+            button_frame.grid_columnconfigure(i, weight=1)
 
     def append_to_input(self, value):
         current_input = self.input_var.get()
