@@ -45,11 +45,10 @@ class CalculatorGUI:
             ("2", lambda: self.append_to_input("2")),
             ("3", lambda: self.append_to_input("3")),
             ("x", lambda: self.append_to_input("*")),
-            ("C", self.clear_input),
             ("0", lambda: self.append_to_input("0")),
             ("/", lambda: self.append_to_input("/")),
             ("=", self.calculate),
-            ("⌫", self.backspace),
+            ("C", self.clear_input),
         ]
 
         for text, command in buttons:
@@ -72,15 +71,6 @@ class CalculatorGUI:
 
     def clear_input(self):
         self.input_var.set("")
-
-    def backspace(self):
-        # check if all has been removed
-        if re.match(r"\d$", self.current):
-            self.display(0)
-            self.new_num = True
-        else:
-            self.current = self.current[:-1]
-            self.display(self.current)
 
     def calculate(self):
         expression = self.input_var.get()
