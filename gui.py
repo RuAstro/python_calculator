@@ -40,13 +40,13 @@ class CalculatorGUI:
             ("4", lambda: self.append_to_input("4")),
             ("5", lambda: self.append_to_input("5")),
             ("6", lambda: self.append_to_input("6")),
-            ("-", lambda: self.append_to_input("-")),
+            ("- ", lambda: self.append_to_input("-")),
             ("1", lambda: self.append_to_input("1")),
             ("2", lambda: self.append_to_input("2")),
             ("3", lambda: self.append_to_input("3")),
             ("x", lambda: self.append_to_input("*")),
             ("0", lambda: self.append_to_input("0")),
-            ("/", lambda: self.append_to_input("/")),
+            ("/ ", lambda: self.append_to_input("/")),
             ("=", self.calculate),
             ("C", self.clear_input),
         ]
@@ -63,6 +63,8 @@ class CalculatorGUI:
             button.grid(
                 row=(buttons.index((text, command)) // 4),
                 column=(buttons.index((text, command)) % 4),
+                padx=5,
+                pady=5,
             )
 
     def append_to_input(self, value):
