@@ -1,6 +1,7 @@
 import tkinter as tk
 from main import *
 from main import Calculator
+import re
 
 
 class CalculatorGUI:
@@ -23,8 +24,8 @@ class CalculatorGUI:
             input_frame,
             textvariable=self.input_var,
             font=("", 14),
-            bd=5,
-            justify="right",
+            bd=10,
+            justify="center",
         )
         self.input_entry.pack(fill="x")
 
@@ -43,18 +44,19 @@ class CalculatorGUI:
             ("1", lambda: self.append_to_input("1")),
             ("2", lambda: self.append_to_input("2")),
             ("3", lambda: self.append_to_input("3")),
-            ("*", lambda: self.append_to_input("*")),
+            ("x", lambda: self.append_to_input("*")),
             ("C", self.clear_input),
             ("0", lambda: self.append_to_input("0")),
             ("/", lambda: self.append_to_input("/")),
             ("=", self.calculate),
+            ("⌫", self.backspace),
         ]
 
         for text, command in buttons:
             button = tk.Button(
                 button_frame,
                 text=text,
-                font=("", 14),
+                font=("", 10),
                 padx=10,
                 pady=10,
                 command=command,
@@ -70,6 +72,15 @@ class CalculatorGUI:
 
     def clear_input(self):
         self.input_var.set("")
+
+    def backspace(self):
+        # check if all has been removed
+        if re.match(r"\d$", self.current):
+            self.display(0)
+            self.new_num = True
+        else:
+            self.current = self.current[:-1]
+            self.display(self.current)
 
     def calculate(self):
         expression = self.input_var.get()
