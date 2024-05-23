@@ -1,7 +1,6 @@
 import tkinter as tk
 from main import *
 from main import Calculator
-import re
 
 
 class CalculatorGUI:
@@ -31,6 +30,8 @@ class CalculatorGUI:
             justify="center",
         )
         self.input_entry.pack(fill="x", expand=True)
+
+        self.window.bind("<Return>", lambda event: self.calculate())
 
         button_frame = tk.Frame(self.window)
         button_frame.grid(row=1, column=0, padx=10, pady=10, sticky="nsew")
