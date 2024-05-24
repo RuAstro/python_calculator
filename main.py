@@ -8,6 +8,7 @@ class Calculator:
     def __init__(self):
         self.result = 0
         log.info(f"Initialize {__class__.__name__}")
+        log.debug("Calculator instance initialized with result = 0")
 
     def add(self, num):
         self.result += num
