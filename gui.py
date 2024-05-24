@@ -61,6 +61,9 @@ class CalculatorGUI:
             ("=", self.calculate),
             ("C", self.clear_input),
             ("^", lambda: self.append_to_input("**")),
+            ("% ", lambda: self.append_to_input("/100")),
+            ("(", self.open_bracket),
+            (")", self.close_bracket),
         ]
 
         for text, command in buttons:
@@ -91,12 +94,23 @@ class CalculatorGUI:
         self.input_var.set(current_input + value)
         log.info(f"Appended {value} to input")
 
+    def open_bracket(self):
+        current_input = self.input_var.get()
+        self.input_var.set(current_input + "(")
+        log.info("Added open bracket")
+
+    def close_bracket(self):
+        current_input = self.input_var.get()
+        self.input_var.set(current_input + ")")
+        log.info("Added close bracket")
+
     def clear_input(self):
         self.input_var.set("")
         log.info("Cleared input")
 
     def calculate(self):
         expression = self.input_var.get()
+        expression = expression.replace("%", "/100")
         log.info(f"Calculating expression: {expression}")
         try:
             result = eval(expression)
