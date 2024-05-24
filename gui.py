@@ -1,6 +1,10 @@
 import tkinter as tk
 from main import *
 from main import Calculator
+import logging
+
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger(__name__)
 
 
 class CalculatorGUI:
@@ -18,7 +22,10 @@ class CalculatorGUI:
         self.window.grid_rowconfigure(0, weight=1)
         self.window.grid_columnconfigure(0, weight=1)
 
+        log.info(f"Initialize {__class__.__name__}")
+
     def create_widgets(self):
+        log.info("Creating widgets...")
         input_frame = tk.Frame(self.window)
         input_frame.grid(row=0, column=0, padx=10, pady=10, sticky="nsew")
 
@@ -81,18 +88,22 @@ class CalculatorGUI:
     def append_to_input(self, value):
         current_input = self.input_var.get()
         self.input_var.set(current_input + value)
+        log.info(f"Appended {value} to input")
 
     def clear_input(self):
         self.input_var.set("")
+        log.info("Cleared input")
 
     def calculate(self):
         expression = self.input_var.get()
+        log.info(f"Calculating expression: {expression}")
         try:
             result = eval(expression)
             self.input_var.set(str(result))
+            log.info(f"Result: {result}")
         except Exception as e:
             self.input_var.set("Error")
-            print(e)
+            log.error(f"Error occurred during calculation: {e}")
 
 
 if __name__ == "__main__":
