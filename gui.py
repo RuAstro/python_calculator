@@ -34,7 +34,7 @@ class CalculatorGUI:
             textvariable=self.input_var,
             font=("", 14),
             bd=10,
-            justify="center",
+            justify="left",
         )
         self.input_entry.pack(fill="x", expand=True)
 
@@ -60,6 +60,7 @@ class CalculatorGUI:
             ("/ ", lambda: self.append_to_input("/")),
             ("=", self.calculate),
             ("C", self.clear_input),
+            ("^", lambda: self.append_to_input("**")),
         ]
 
         for text, command in buttons:
@@ -102,7 +103,7 @@ class CalculatorGUI:
             self.input_var.set(str(result))
             log.info(f"Result: {result}")
         except Exception as e:
-            self.input_var.set("Error")
+            self.input_var.set("Error: need more sense")
             log.error(f"Error occurred during calculation: {e}")
 
 
