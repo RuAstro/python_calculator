@@ -1,20 +1,22 @@
 import logging
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
+log = logging.getLogger(__name__)
 
 
 class Calculator:
     def __init__(self):
         self.result = 0
+        log.info(f"Initialize {__class__.__name__}")
 
     def add(self, num):
         self.result += num
-        #        logging.info(f"Added {num}. Result: {self.result}")
+        log.debug(f"Added {num}. Result: {self.result}")
         return self.result
 
     def subtract(self, num):
         self.result -= num
-        #        logging.info(f"Subtracted {num}. Result: {self.result}")
+        log.debug(f"Subtracted {num}. Result: {self.result}")
         return self.result
 
     def multiply(self, num):
